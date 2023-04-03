@@ -47,6 +47,7 @@ const Home = (props) => {
                     setWeather(data.list[0].weather[0]);
                    
                 }); 
+                console.log("data");
             });
         }
       

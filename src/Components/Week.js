@@ -54,7 +54,7 @@ const Week = (props) => {
         
                     }
                     setWeekData(arr);
-                    
+                    console.log("Data")
                          
                 }); 
             });
@@ -64,7 +64,7 @@ const Week = (props) => {
 
     const searchByName = () => {
         console.log("In week search response")
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=9`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=`)
          .then((res) => res.json() )
          .then((data) => {
             

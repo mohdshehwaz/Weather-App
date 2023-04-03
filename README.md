@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Images of the Weather Forecast Application](./src/images/first.png)
+![Images of the Weather Forecast Application](./src/images/sec.png)
+
 
 ## Available Scripts
 
