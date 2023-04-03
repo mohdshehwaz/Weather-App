@@ -17,7 +17,7 @@ const Home = (props) => {
     useEffect(() =>{
         if(props.city==""){
             searchByCord();
-        }
+        } 
         else{
             searchByName();
         }
@@ -32,7 +32,7 @@ const Home = (props) => {
             fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=9bb14c0df323a08017f83e3b0bae610f`)
                 .then(res =>res.json())
                 .then((data) => {
-                    console.log(data);
+                    
                     setLoc({
                         city:data.city.name,
                         country:data.city.country

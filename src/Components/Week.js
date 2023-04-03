@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import './week.scss';
+import getDate from '../getDate';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
 const Week = (props) => {
@@ -25,6 +26,11 @@ const Week = (props) => {
             fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=9bb14c0df323a08017f83e3b0bae610f`)
                 .then(res =>res.json())
                 .then((data) => {
+
+                
+                    var d = new Date(data.list[0].dt_txt.substring(0,10));
+                    console.log(getDate.getDay(d));
+
                     setLoc({
                         city:data.city.name,
                         country:data.city.country
@@ -59,6 +65,8 @@ const Week = (props) => {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=9bb14c0df323a08017f83e3b0bae610f`)
          .then((res) => res.json() )
          .then((data) => {
+            
+
             setLoc({
                 city:data.city.name,
                 country:data.city.country
@@ -67,12 +75,15 @@ const Week = (props) => {
 
             let i =0;
             while(i<data.list.length){
+                var d = new Date(data.list[i].dt_txt.substring(0,10));
+                
                 let obj = {
                     temp:data.list[i].main.temp - 273.15,
                     humidity:data.list[i].main.humidity,
                     feels_like:data.list[i].main.feels_like - 273.15,
                     wind:data.list[i].wind.speed,
-                    weather:data.list[i].weather[0]
+                    weather:data.list[i].weather[0],
+                    date:getDate(d)
                 }
                 
                 arr.push(obj);
@@ -97,7 +108,7 @@ const Week = (props) => {
             <div className='week-full-data'>
                 {weekData.map((item,index)  => (
                     <div className='week-day-data' key={index}>
-                        <h1>Date</h1>
+                        <h4>{item.date}</h4>
                         <div className='week-sub-item'>
                             <div className='sub-item'>
                                 <p>Temperature</p>
