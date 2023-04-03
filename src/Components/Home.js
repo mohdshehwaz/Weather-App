@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import icon from '../icon';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import Switch from '@mui/material/Switch';
+
 import './Home.scss';
 
 const Home = (props) => {
@@ -13,6 +15,7 @@ const Home = (props) => {
     const [feel,setFeel] = useState(0.0);
     const [humidity,setHumidity] = useState(0.0);
     const [wind,setWind] = useState(0.0);
+    const [checked, setChecked] = useState(true);
     
     useEffect(() =>{
         if(props.city==""){
@@ -66,6 +69,11 @@ const Home = (props) => {
             setWeather(data.list[0].weather[0]);
          })
     }
+    
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
 
     return (
         <div className='homeContainer'>
@@ -84,13 +92,31 @@ const Home = (props) => {
                 <p>{weather.main}</p>   
             </div>  
             <div className='temp'>
-                <h1>{`${temp.toFixed(2)}`}&deg;C</h1>
+                {checked ? 
+                    <h1>{`${temp.toFixed(2)}`}&deg; C</h1>
+                    :
+                    <h1>{`${((temp*9/5)+32).toFixed(2)}`}&deg; F</h1>
+                }
+
                 
             </div>  
             <div className='temp'>
+                {checked ? 
+                    <p>{`Feels Like ${feel.toFixed(2)}`}&deg; C</p>
+                    :
+                    <p>{`Feels Like ${((feel*9/5)+32).toFixed(2)}`}&deg; F</p>
+                }
                 
-                <p>{`Feels Like ${feel.toFixed(2)}`}&deg;C</p>
-            </div>  
+            </div>
+            <div className='alter-temp'>
+                <span>F</span>
+                <Switch
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />
+                <span>T</span>
+            </div>
             <div className='wind'>
                 <p>{`Wind Speed: ${wind} km/s`} </p>
                 <p>{`Humidity: ${humidity} %`}</p>

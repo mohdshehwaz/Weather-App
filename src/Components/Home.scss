@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    min-height: 400px;
     .location-img{
         height: 25px;
         width: 25px;
@@ -37,6 +38,11 @@
         margin: 0;
         color: #fff;
         font-size: 12px;
+    }
+    .alter-temp span{
+        color: #fff;
+        font-size: medium;
+        font-weight: 700;
     }
     .wind{
         width: 100%;

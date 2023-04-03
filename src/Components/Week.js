@@ -2,12 +2,14 @@ import React, { useState,useEffect } from 'react'
 import './week.scss';
 import getDate from '../getDate';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import Switch from '@mui/material/Switch';
 
 const Week = (props) => {
     const [weekData,setWeekData] = useState([]);
     const [loc,setLoc] = useState({});
     const [latitude,setLatitude] = useState('');
     const [longitude,setLongtitude] = useState('');
+    const [checked, setChecked] = useState(true);
 
     useEffect(() =>{
         if(props.city==""){
@@ -95,6 +97,9 @@ const Week = (props) => {
           
          });
     }
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
     return (
         
         <div className='week-data'>
@@ -102,8 +107,17 @@ const Week = (props) => {
                 <LocationOnOutlinedIcon />
             </div>
             <div className='city'>
-                <span>{`${loc.city} , ${loc.country}`}</span>
+                <span style={{fontWeight:800}}>{`${loc.city} , ${loc.country}`}</span>
 
+            </div>
+            <div className='alter-temp'>
+                <span style={{fontWeight:800}}>F</span>
+                <Switch
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />
+                <span style={{fontWeight:800}}>T</span>
             </div>
             <div className='week-full-data'>
                 {weekData.map((item,index)  => (
@@ -112,11 +126,20 @@ const Week = (props) => {
                         <div className='week-sub-item'>
                             <div className='sub-item'>
                                 <p>Temperature</p>
-                                <p>{item.temp.toFixed(2)} &deg; C</p>
+                                {checked ? 
+                                    <p>{`${item.temp.toFixed(2)}`}&deg; C</p>
+                                    :
+                                    <p>{`${((item.temp*9/5)+32).toFixed(2)}`}&deg; F</p>
+                                }
                             </div>
                             <div className='sub-item'>
                                 <p>Feels Like</p>
-                                <p>{item.feels_like.toFixed(2)} &deg; C</p>
+
+                                {checked ? 
+                                    <p>{`${item.feels_like.toFixed(2)}`}&deg; C</p>
+                                    :
+                                    <p>{`${((item.feels_like*9/5)+32).toFixed(2)}`}&deg; F</p>
+                                }
                             </div>
                             <div className='sub-item'>
                                 <p>Humidity</p>
