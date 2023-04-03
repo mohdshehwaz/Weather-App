@@ -1,23 +1,44 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Home from './Components/Home';
+import Week from './Components/Week';
 
-function App() {
+function App(props) {
+  const [name,setName] = useState('');
+  const [cityName,setCityName] = useState('');
+  const [alt,setAlt] = useState(true);
+
+  const clickEnter = (e) => {
+    e.preventDefault();
+    if(e.key === "Enter"){
+
+      setCityName(name);
+      setName("");
+    }
+  }
+  const alterDayState = () => {
+    setAlt(true);
+  }
+  const alterWeekState = () => {
+    setAlt(false);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 style={{color:'gray'}}>Weather Forecast App</h1>
+      <div className='main-input'> 
+        <input className='search-input' onKeyUp={clickEnter} value={name} onChange={(e) => setName(e.target.value)} />
+      </div>
+      
+
+      <div className='day-week'>
+        <div className='btns'>
+          <button onClick={alterDayState} >Day</button>
+          <button onClick={alterWeekState}>Week</button>
+        </div>
+        {alt ? <Home city={cityName} /> : <Week city={cityName}/>}
+      </div>
+      
+      
     </div>
   );
 }
