@@ -25,7 +25,7 @@ const Week = (props) => {
              
             navigator.geolocation.getCurrentPosition((position) => {
             
-            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=9bb14c0df323a08017f83e3b0bae610f`)
+            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
                 .then(res =>res.json())
                 .then((data) => {
 
@@ -64,7 +64,7 @@ const Week = (props) => {
 
     const searchByName = () => {
         console.log("In week search response")
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=9bb14c0df323a08017f83e3b0bae610f`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=9`)
          .then((res) => res.json() )
          .then((data) => {
             
