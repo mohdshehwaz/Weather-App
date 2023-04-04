@@ -32,7 +32,7 @@ const Home = (props) => {
             navigator.geolocation.getCurrentPosition((position) => {
             setLatitude(position.coords.latitude);
             setLongtitude(position.coords.longitude);
-            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+            fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=9bb14c0df323a08017f83e3b0bae610f`)
                 .then(res =>res.json())
                 .then((data) => {
                     
@@ -47,7 +47,6 @@ const Home = (props) => {
                     setWeather(data.list[0].weather[0]);
                    
                 }); 
-                console.log("data");
             });
         }
       
@@ -55,7 +54,7 @@ const Home = (props) => {
     }
     const searchByName = () => {
         
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&appid=9bb14c0df323a08017f83e3b0bae610f`)
          .then((res) => res.json() )
          .then((data) => {
             console.log(data);
